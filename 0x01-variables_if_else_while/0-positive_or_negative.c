@@ -7,26 +7,26 @@
 
 /**
  * main - Prints if number is positive, zero or negative
- * Return: Always (success)
- *
+ * Return: 0 on success
  */
 int main(void)
 
 {
 	int n;
-	srand(time(0));
-	n = rand() - RAND_M/2;
 
-	if (n > 0)
+	srand(time(0));
+	n = rand() - RAND_MAX / 2;
+	/* your code goes there */
+	if (n < 0)
 	{
-	printf("Kd is positive\n", n);
+	printf("%d is %s\n", n, "negative");
 	}
-	else if (n == 0)
+	else if (n > 0)
 	{
-	 printf("Kd is zero\n", n);
+	 printf("%d is %s\n", n, "positive");
 	}
 	else
-	{printf("Kd is negative\n", n);
+	{printf("%d is %s\n", n, "zero");
 	}
 	return (0);
 }
