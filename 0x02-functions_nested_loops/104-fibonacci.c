@@ -7,37 +7,43 @@
  */
 int main(void)
 {
-	unsigned long int a = 1, b = 2, next;
-	unsigned long int a_high, a_low, b_high, b_low, next_high, next_low;
-	int i;
+	int count;
+	unsigned int a = 1, b = 2;
+	unsigned long int a_high, a_low, b_high, b_low, high, low;
+	unsigned long max = 1000000000;
 
 	printf("%lu, %lu", a, b);
 
-	for (i = 2; i < 98; i++)
+	for (count = 2; count < 98; count++)
 	{
-	if (a + b < a)
+	if (b > max)
 	{
-	a_high = a / 1000000000;
-	a_low = a % 1000000000;
-	b_high = b / 1000000000;
-	b_low = b % 1000000000;
+	a_high = a / max;
+	a_low = a % max;
+	b_low = b / max;
+	b_low = b % max;
 
-	next_low = a_low + b_low;
-	next_high = a_high + b_high + (next_low / 1000000000);
-	next_low = next_low % 1000000000;
-	printf(", %lu%09lu", next_high, next_low);
+	high = a_high + b_high;
+	low = a_low + b_low;
 
+	if (low > max)
+	{
+	high++;
+	low %= max;
+	}
+
+	printf(", %lu%09lu", high, low);
+
+	a = b;
 	a_high = b_high;
 	a_low = b_low;
-	b_high = next_high;
-	b_low = next_low;
+	b_high = high;
+	b_low = low;
 
-	a = a_high * 1000000000 + a_low;
-	b = b_high * 1000000000 + b_low;
 	}
 	else
 	{
-	next = a + b;
+	unsigned long next = a + b;
 	printf(", %lu", next);
 	a = b;
 	b = next;
